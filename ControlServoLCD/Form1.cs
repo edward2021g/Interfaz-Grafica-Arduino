@@ -17,10 +17,5 @@ namespace ControlServoLCD
             InitializeComponent();
         }
 
-        private void checkBoxLedA_CheckedChanged(object sender, EventArgs e)
-        {
-
-        }
-
     }
 }
