@@ -23,7 +23,7 @@ namespace ControlServoLCD
                 comboBoxPuerto.DataSource = ports;             
 
                 // comboBoxBaud
-                string[] rates = { "9600", "38400", "115200" };
+                string[] rates = { "9600", "38400", "57600", "115200" };
                 comboBoxBaud.DataSource = rates;
                 labelInfo.Text = "";
             }
@@ -131,7 +131,7 @@ namespace ControlServoLCD
                     serialPort1.Open();
 
                     progressBarConexion.Value = 100;
-                    buttonConectar.Text = "Desconectar";
+                    buttonConectar.Text = "DESCONECTAR";
                     buttonRefrescar.Enabled = false;
 
                     // habilitar componentes del form
@@ -149,10 +149,10 @@ namespace ControlServoLCD
 
                     disableComponents();                    
                     progressBarConexion.Value = 0;
-                    buttonConectar.Text = "Conectar";
+                    buttonConectar.Text = "CONECTAR";
                     buttonRefrescar.Enabled = true;
                     borrarLCD();
-                    labelInfo.Text = "0";
+                    labelInfo.Text = "0°";
                     serialPort1.WriteLine($"$S0");
 
                     serialPort1.Close();
@@ -220,7 +220,7 @@ namespace ControlServoLCD
             try
             {
                 // enviar comando de grados al servo
-                labelInfo.Text = trackBarServo.Value.ToString();
+                labelInfo.Text = trackBarServo.Value + "°";
                 serialPort1.WriteLine($"$S{labelInfo.Text}");
             }
             catch (Exception error)
