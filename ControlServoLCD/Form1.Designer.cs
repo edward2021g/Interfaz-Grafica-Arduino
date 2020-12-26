@@ -104,7 +104,7 @@ namespace ControlServoLCD
             // 
             this.checkBoxLedB.AutoSize = true;
             this.checkBoxLedB.Font = new System.Drawing.Font("Montserrat", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBoxLedB.Location = new System.Drawing.Point(158, 116);
+            this.checkBoxLedB.Location = new System.Drawing.Point(157, 116);
             this.checkBoxLedB.Margin = new System.Windows.Forms.Padding(2);
             this.checkBoxLedB.Name = "checkBoxLedB";
             this.checkBoxLedB.Size = new System.Drawing.Size(66, 23);
@@ -117,7 +117,7 @@ namespace ControlServoLCD
             // 
             this.checkBoxLedA.AutoSize = true;
             this.checkBoxLedA.Font = new System.Drawing.Font("Montserrat", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBoxLedA.Location = new System.Drawing.Point(48, 116);
+            this.checkBoxLedA.Location = new System.Drawing.Point(49, 116);
             this.checkBoxLedA.Margin = new System.Windows.Forms.Padding(2);
             this.checkBoxLedA.Name = "checkBoxLedA";
             this.checkBoxLedA.Size = new System.Drawing.Size(66, 23);
@@ -129,7 +129,7 @@ namespace ControlServoLCD
             // pictureLedC
             // 
             this.pictureLedC.Image = global::ControlServoLCD.Properties.Resources.redLedOff;
-            this.pictureLedC.Location = new System.Drawing.Point(59, 48);
+            this.pictureLedC.Location = new System.Drawing.Point(275, 48);
             this.pictureLedC.Margin = new System.Windows.Forms.Padding(2);
             this.pictureLedC.Name = "pictureLedC";
             this.pictureLedC.Size = new System.Drawing.Size(42, 42);
@@ -151,7 +151,7 @@ namespace ControlServoLCD
             // pictureLedA
             // 
             this.pictureLedA.Image = global::ControlServoLCD.Properties.Resources.redLedOff;
-            this.pictureLedA.Location = new System.Drawing.Point(275, 48);
+            this.pictureLedA.Location = new System.Drawing.Point(59, 48);
             this.pictureLedA.Margin = new System.Windows.Forms.Padding(2);
             this.pictureLedA.Name = "pictureLedA";
             this.pictureLedA.Size = new System.Drawing.Size(42, 42);
@@ -176,22 +176,28 @@ namespace ControlServoLCD
             this.groupBox2.Size = new System.Drawing.Size(374, 166);
             this.groupBox2.TabIndex = 6;
             this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "LCD CONTROL";
+            this.groupBox2.Text = "CONTROL LCD";
             // 
             // buttonBorrar
             // 
+            this.buttonBorrar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(197)))), ((int)(((byte)(12)))), ((int)(((byte)(206)))));
+            this.buttonBorrar.FlatAppearance.BorderSize = 0;
+            this.buttonBorrar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonBorrar.Font = new System.Drawing.Font("Open Sans Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonBorrar.Location = new System.Drawing.Point(229, 104);
             this.buttonBorrar.Margin = new System.Windows.Forms.Padding(2);
             this.buttonBorrar.Name = "buttonBorrar";
             this.buttonBorrar.Size = new System.Drawing.Size(116, 40);
             this.buttonBorrar.TabIndex = 5;
-            this.buttonBorrar.Text = "Borrar";
-            this.buttonBorrar.UseVisualStyleBackColor = true;
+            this.buttonBorrar.Text = "BORRAR";
+            this.buttonBorrar.UseVisualStyleBackColor = false;
             this.buttonBorrar.Click += new System.EventHandler(this.buttonBorrar_Click);
             // 
             // buttonImprimir
             // 
+            this.buttonImprimir.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(7)))), ((int)(((byte)(141)))), ((int)(((byte)(237)))));
+            this.buttonImprimir.FlatAppearance.BorderSize = 0;
+            this.buttonImprimir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonImprimir.Font = new System.Drawing.Font("Open Sans Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonImprimir.Location = new System.Drawing.Point(229, 46);
             this.buttonImprimir.Margin = new System.Windows.Forms.Padding(2);
@@ -199,7 +205,7 @@ namespace ControlServoLCD
             this.buttonImprimir.Size = new System.Drawing.Size(116, 40);
             this.buttonImprimir.TabIndex = 4;
             this.buttonImprimir.Text = "IMPRIMIR";
-            this.buttonImprimir.UseVisualStyleBackColor = true;
+            this.buttonImprimir.UseVisualStyleBackColor = false;
             this.buttonImprimir.Click += new System.EventHandler(this.buttonImprimir_Click);
             // 
             // textBoxLinea2
@@ -209,7 +215,7 @@ namespace ControlServoLCD
             this.textBoxLinea2.Margin = new System.Windows.Forms.Padding(2);
             this.textBoxLinea2.MaxLength = 16;
             this.textBoxLinea2.Name = "textBoxLinea2";
-            this.textBoxLinea2.Size = new System.Drawing.Size(160, 26);
+            this.textBoxLinea2.Size = new System.Drawing.Size(174, 26);
             this.textBoxLinea2.TabIndex = 3;
             // 
             // labelLinea2
@@ -241,7 +247,7 @@ namespace ControlServoLCD
             this.textBoxLinea1.Margin = new System.Windows.Forms.Padding(2);
             this.textBoxLinea1.MaxLength = 16;
             this.textBoxLinea1.Name = "textBoxLinea1";
-            this.textBoxLinea1.Size = new System.Drawing.Size(160, 26);
+            this.textBoxLinea1.Size = new System.Drawing.Size(174, 26);
             this.textBoxLinea1.TabIndex = 0;
             // 
             // groupBox3
@@ -266,14 +272,17 @@ namespace ControlServoLCD
             // 
             // buttonRefrescar
             // 
+            this.buttonRefrescar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(197)))), ((int)(((byte)(12)))), ((int)(((byte)(206)))));
+            this.buttonRefrescar.FlatAppearance.BorderSize = 0;
+            this.buttonRefrescar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonRefrescar.Font = new System.Drawing.Font("Open Sans Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonRefrescar.Location = new System.Drawing.Point(264, 37);
             this.buttonRefrescar.Margin = new System.Windows.Forms.Padding(2);
             this.buttonRefrescar.Name = "buttonRefrescar";
             this.buttonRefrescar.Size = new System.Drawing.Size(116, 40);
             this.buttonRefrescar.TabIndex = 6;
-            this.buttonRefrescar.Text = "Refrescar";
-            this.buttonRefrescar.UseVisualStyleBackColor = true;
+            this.buttonRefrescar.Text = "REFRESCAR";
+            this.buttonRefrescar.UseVisualStyleBackColor = false;
             this.buttonRefrescar.Click += new System.EventHandler(this.buttonRefrescar_Click);
             // 
             // progressBarConexion
@@ -285,13 +294,16 @@ namespace ControlServoLCD
             // 
             // buttonConectar
             // 
+            this.buttonConectar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(7)))), ((int)(((byte)(141)))), ((int)(((byte)(237)))));
+            this.buttonConectar.FlatAppearance.BorderSize = 0;
+            this.buttonConectar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonConectar.Font = new System.Drawing.Font("Open Sans Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonConectar.Location = new System.Drawing.Point(264, 89);
             this.buttonConectar.Name = "buttonConectar";
             this.buttonConectar.Size = new System.Drawing.Size(116, 40);
             this.buttonConectar.TabIndex = 4;
-            this.buttonConectar.Text = "Conectar";
-            this.buttonConectar.UseVisualStyleBackColor = true;
+            this.buttonConectar.Text = "CONECTAR";
+            this.buttonConectar.UseVisualStyleBackColor = false;
             this.buttonConectar.Click += new System.EventHandler(this.buttonConectar_Click);
             // 
             // comboBoxBaud
@@ -347,17 +359,18 @@ namespace ControlServoLCD
             this.groupBox4.Size = new System.Drawing.Size(374, 181);
             this.groupBox4.TabIndex = 6;
             this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "SERVO CONTROL";
+            this.groupBox4.Text = "CONTROL SERVO";
             // 
             // labelInfo
             // 
             this.labelInfo.AutoSize = true;
-            this.labelInfo.Location = new System.Drawing.Point(152, 125);
+            this.labelInfo.Font = new System.Drawing.Font("Montserrat", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelInfo.Location = new System.Drawing.Point(169, 125);
             this.labelInfo.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelInfo.Name = "labelInfo";
-            this.labelInfo.Size = new System.Drawing.Size(62, 19);
+            this.labelInfo.Size = new System.Drawing.Size(34, 23);
             this.labelInfo.TabIndex = 8;
-            this.labelInfo.Text = "label3";
+            this.labelInfo.Text = "....";
             // 
             // label2
             // 

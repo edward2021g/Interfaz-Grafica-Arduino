@@ -25,6 +25,7 @@ namespace ControlServoLCD
                 // comboBoxBaud
                 string[] rates = { "9600", "38400", "115200" };
                 comboBoxBaud.DataSource = rates;
+                labelInfo.Text = "";
             }
             catch (Exception error)
             {
@@ -244,7 +245,9 @@ namespace ControlServoLCD
             buttonBorrar.Enabled = false;
 
             // trackbar desactivado
+            trackBarServo.Value = 0;
             trackBarServo.Enabled = false;
+            
         }
 
         private void enableComponents()
