@@ -86,5 +86,11 @@
   <ItemGroup>
     <None Include="images\redLedOn.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\door_close.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\door_open.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
