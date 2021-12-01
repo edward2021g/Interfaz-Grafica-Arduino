@@ -2,6 +2,7 @@
 using System.Windows.Forms;
 using System.IO.Ports;
 using System.Threading;
+using System.Drawing;
 
 namespace ControlServoLCD
 {
@@ -11,14 +12,13 @@ namespace ControlServoLCD
         {
             InitializeComponent();
         }
-        //bool bln_Puerta_Abierta;
-        //Thread Hilo;
         private string strbufferingIn; //> Agregado JEGZ 28/11/2021 - Control del Puerto Serial con C# en Visual Studio 2015 Community
-        //private char strbufferingIn;
         private string strbufferingOut;
         private string strPassword = "****";
-        //char[] charArrayPass;
         char[] charArrayPass = new char[4] { '*','*','*','*'};
+        char[] charArrayPassNueva = new char[4] { '*', '*', '*', '*' }; //Agregado 29/11/2021 para cambiar contraseña
+        bool blnErrorEnPassword; //Agregado 29/11/2021 para cambiar contraseña
+        private string strContra = "3007"; //Contraseña por defecto - Agregado 29/11/2021 para cambiar contraseña
 
         public object Interfaz_Grafica_Arduino { get; private set; }
 
@@ -44,26 +44,24 @@ namespace ControlServoLCD
             char first = charArray[0];
             if (first == 'o')
             {
-                //MessageBox.Show("Puerta abierta");
-                btnDoor.Text = "CLOSE";
+                btnDoor.Text = "CERRAR";
+                btnDoor.BackColor = Color.FromArgb(197, 12, 206); //ROSA
                 pct_cerradura.Image = Properties.Resources.door_open;
                 LimpiarPass();
             }
             if (first == 'c')
             {
-                //MessageBox.Show("Puerta cerrada");
-                btnDoor.Text = "OPEN";
+                btnDoor.Text = "ABRIR";
+                btnDoor.BackColor = Color.FromArgb(7, 141, 237);//AZUL
                 pct_cerradura.Image = Properties.Resources.door_close;
                 LimpiarPass();
             }
             if (first == 'e')
             {
-                //MessageBox.Show("Error en contraseña");
-                lblRecibo.Text = "Error en contraseña";
                 LimpiarPass();
             }
             //-------Agregado para recibir la contraseña 
-            if(first == '0' || first == '1' || first == '2' || first == '3' || first == '4' || 
+            if (first == '0' || first == '1' || first == '2' || first == '3' || first == '4' || 
                 first == '5' || first == '6' || first == '7' || first == '8' || first == '9' || 
                 first == 'A' || first == 'B' || first == 'C' || first == 'D')
             {
@@ -74,12 +72,6 @@ namespace ControlServoLCD
                         charArrayPass[i] = first;
                         break;
                     }
-                    /*
-                    charArrayPass[i] = first;
-                    if (i == 5)
-                    {
-                        break;
-                    }*/
                 }
             }
             string s = new string(charArrayPass);
@@ -114,16 +106,7 @@ namespace ControlServoLCD
                 labelInfo.Text = "";
 
                 btnDoor.Enabled = false;
-
-                //bool bln_Puerta_Abierta;
-
-                //codigo para evitar mensaje de error: Cross-thread operation not valid
-                //TextBox.CheckForIllegalCrossThreadCalls = false;
-                //Label.CheckForIllegalCrossThreadCalls = false;
-
-                //Agrego un hilo para el metodo EscucharSerial() 24/11/2021
-                //Thread Hilo = new Thread(EscucharSerial);
-                //Hilo.Start();
+                trackBarServo.Value = 90;
 
                 strbufferingIn = ""; //> Agregado JEGZ 28/11/2021 - Control del Puerto Serial con C# en Visual Studio 2015 Community
                 strbufferingOut = ""; //< Agregado JEGZ 28/11/2021 
@@ -155,8 +138,6 @@ namespace ControlServoLCD
             }
         }
 
-
-
         private void buttonConectar_Click(object sender, EventArgs e)
         {
             try
@@ -169,15 +150,12 @@ namespace ControlServoLCD
                     serialPort1.Parity = Parity.None;  
                     serialPort1.StopBits = StopBits.One; 
                     serialPort1.Handshake = Handshake.None;
-                    textBoxLinea1.Text = "";
-                    textBoxLinea2.Text = "";
                     //<JEGZ 27/11/2021
                     serialPort1.PortName = comboBoxPuerto.Text;
                     serialPort1.Open();
 
                     labelInfo.Text = "90°";//>JEGZ 27/11/2021
                     serialPort1.DiscardOutBuffer();
-                    //strbufferingOut = $"$S90";
                     strbufferingOut = "c"; //JEGZ 6:34 28/11/2021
                     pct_cerradura.Image = Properties.Resources.door_close;
                     serialPort1.WriteLine(strbufferingOut);
@@ -189,36 +167,26 @@ namespace ControlServoLCD
 
                     // habilitar componentes del form
                     enableComponents();
-
-                    //Agrego un hilo para el metodo EscucharSerial() 24/11/2021
-                    //Thread Hilo = new Thread(EscucharSerial);
-                    //Hilo = new Thread(EscucharSerial);
-                    //Hilo.Start();
+                    comboBoxPuerto.Enabled = false;
+                    comboBoxBaud.Enabled = false;
                 }
                 else
                 {
-                    // empty lines
-                    textBoxLinea1.Text = "";
-                    textBoxLinea2.Text = "";
-
                     disableComponents();                    
                     progressBarConexion.Value = 0;
                     buttonConectar.Text = "CONECTAR";
                     buttonRefrescar.Enabled = true;
-                    borrarLCD();
 
-                    //labelInfo.Text = "90°";
-                    //serialPort1.WriteLine($"$S90");
                     labelInfo.Text = "90°";//>JEGZ 27/11/2021
                     serialPort1.DiscardOutBuffer();
-                    //strbufferingOut = $"$S90";
                     strbufferingOut = "c"; //JEGZ 6:34 28/11/2021
                     serialPort1.WriteLine(strbufferingOut);
                     lblDatosEnviados.Text = strbufferingOut;//<JEGZ 27/11/2021
 
                     serialPort1.Close();
 
-                    //Hilo.Abort();
+                    comboBoxPuerto.Enabled = true;
+                    comboBoxBaud.Enabled = true;
                 }
             }
             catch (Exception error)
@@ -242,31 +210,31 @@ namespace ControlServoLCD
         {
             try
             {
-                // leer las lineas de texto
-                string l1 = textBoxLinea1.Text;
-                string l2 = textBoxLinea2.Text;
-
-                // rellenar a 16 caracteres la linea1
-                int n = l1.Length;
-                if (n < 16)
+                //valido la cadena de la nueva contraseña
+                if (txtContrasenia.Text != strContra)
                 {
-                    for (int i = 0; i < (16 - n); i++)
-                    {
-                        // agregar un espacio en blanco
-                        l1 += " ";
-                    }
+                    MessageBox.Show("La contraseña es incorrecta.", "Error");
+                    txtContrasenia.Text = "";
                 }
-
-                // enviar comando a arduino para imprimir en el mensaje
-                serialPort1.WriteLine($"$L{l1}{l2}");
-
-                l1 = "";
-                l2 = "";
+                else
+                {
+                    txtContrasenia.Text = "";
+                    //----- Enviando el comando a Arduino
+                    serialPort1.DiscardOutBuffer();
+                    strbufferingOut = "o";
+                    lblDatosEnviados.Text = strbufferingOut;
+                    serialPort1.Write(strbufferingOut);
+                    btnDoor.Text = "CERRAR";
+                    txtContrasenia.Enabled = false;
+                    buttonImprimir.Enabled = false;
+                    trackBarServo.Value = trackBarServo.Maximum;
+                    btnDoor.BackColor = Color.FromArgb(197, 12, 206);
+                }
             }
-            catch (Exception error)
+            catch (Exception x)
             {
-                MessageBox.Show(error.Message);
-            }            
+                MessageBox.Show(x.Message);
+            }
         }
 
 
@@ -274,7 +242,7 @@ namespace ControlServoLCD
         {
             try
             {
-                borrarLCD();
+                //borrarLCD();
             }
             catch (Exception error)
             {
@@ -289,29 +257,31 @@ namespace ControlServoLCD
             {
                 // enviar comando de grados al servo
                 labelInfo.Text = trackBarServo.Value + "°";
-                //serialPort1.WriteLine($"$S{labelInfo.Text}");
                 if(trackBarServo.Value == 90)
                 {
-                    btnDoor.Text = "OPEN";
+                    btnDoor.Text = "ABRIR";
+                    txtContrasenia.Enabled = true;
+                    buttonImprimir.Enabled = true;
                     labelInfo.Text = $"90°";
-                    textBoxLinea1.Text = "";
-                    textBoxLinea2.Text = "";
                     serialPort1.DiscardOutBuffer();
                     strbufferingOut = "c"; 
                     pct_cerradura.Image = Properties.Resources.door_close;
                     lblDatosEnviados.Text = strbufferingOut;
                     serialPort1.WriteLine(strbufferingOut);
-                }else if(trackBarServo.Value == 180 || trackBarServo.Value == 0)
+                    btnDoor.BackColor = Color.FromArgb(7, 141, 237);
+                }
+                else if(trackBarServo.Value == 180 || trackBarServo.Value == 0)
                 {
-                    btnDoor.Text = "CLOSE";
+                    btnDoor.Text = "CERRAR";
+                    txtContrasenia.Enabled = false;
+                    buttonImprimir.Enabled = false;
                     labelInfo.Text = $"180°";
-                    textBoxLinea1.Text = "";
-                    textBoxLinea2.Text = "";
                     serialPort1.DiscardOutBuffer();
                     strbufferingOut = "o";
                     pct_cerradura.Image = Properties.Resources.door_close;
                     lblDatosEnviados.Text = strbufferingOut;
                     serialPort1.WriteLine(strbufferingOut);
+                    btnDoor.BackColor = Color.FromArgb(197, 12, 206);
                 }
             }
             catch (Exception error)
@@ -325,150 +295,211 @@ namespace ControlServoLCD
         private void disableComponents()
         {
             // textboxes desactivados
-            textBoxLinea1.Enabled = false;
-            textBoxLinea2.Enabled = false;
             buttonImprimir.Enabled = false;
-            buttonBorrar.Enabled = false;
+            txtContrasenia.Enabled = false;
 
             // trackbar desactivado
             trackBarServo.Value = 0;
             trackBarServo.Enabled = false;
-            
+
+            //botones de cambio de contraseña desactivados
+            btnMostrarPassActual.Enabled = false;
+            btnCambiarPass.Enabled = false;
+            txtNuevaPass.Enabled = false;
+            txtPassActual.Enabled = false;
+            txtPass.Enabled = false;
+            btnDoor.Enabled = false;
         }
 
         private void enableComponents()
         {
             // textboxes activados
-            textBoxLinea1.Enabled = true;
-            textBoxLinea2.Enabled = true;
             buttonImprimir.Enabled = true;
-            buttonBorrar.Enabled = true;
+            txtContrasenia.Enabled = true;
 
             // trackbar activado
             trackBarServo.Enabled = true;
+            trackBarServo.Value = 90;
+
+            //botones de cambio de contraseña desactivados
+            btnMostrarPassActual.Enabled = true;
+            btnCambiarPass.Enabled = true;
+            txtNuevaPass.Enabled = true;
 
             btnDoor.Enabled = true; //JEGZ ACTIVA BOON ABRIR
         }
 
-        private void borrarLCD()
-        {
-            // borrar l1 y l2 en la app y en el display lCD
-            textBoxLinea1.Text = "";
-            textBoxLinea2.Text = "";
-
-            serialPort1.WriteLine($"$L");
-        }
-
         private void btnDoor_Click(object sender, EventArgs e)
         {
-            if (btnDoor.Text == "OPEN")
+            if (btnDoor.Text == "ABRIR")
             {
-                //serialPort1.WriteLine("$S180");
-                //trackBarServo.Value = 180;
                 trackBarServo.Value = trackBarServo.Maximum;
-                //abelInfo.Text = "180°";
-                //serialPort1.WriteLine("$S180");
+                btnDoor.BackColor = Color.FromArgb(197, 12, 206); //ROSA
                 labelInfo.Text = "0°";
-                btnDoor.Text = "CLOSE";
+                btnDoor.Text = "CERRAR";
 
                 //>Agregado JEGZ 28/11/2021 - Control del Puerto Serial con C# en Visual Studio 2015 Community
-                textBoxLinea1.Text = "";
-                textBoxLinea2.Text = "";
                 serialPort1.DiscardOutBuffer();
-                //strbufferingOut = $"$S0";
                 strbufferingOut = "o"; //JEGZ 6:34 28/11/2021
                 pct_cerradura.Image = Properties.Resources.door_open;
                 lblDatosEnviados.Text = strbufferingOut;
                 serialPort1.Write(strbufferingOut);
                 //<Agregado JEGZ 28/11/2021
                 LimpiarPass();
+                txtContrasenia.Enabled = false;
+                buttonImprimir.Enabled = false;
             }
             else
             {
-                if (btnDoor.Text == "CLOSE")
+                if (btnDoor.Text == "CERRAR")
                 {
-                    btnDoor.Text = "OPEN";
-                    //serialPort1.WriteLine("$S90");
+                    btnDoor.Text = "ABRIR";
+                    btnDoor.BackColor = Color.FromArgb(7, 141, 237);//AZUL
                     labelInfo.Text = $"90°";
                     trackBarServo.Value = 90;
-                    //trackBarServo.Value = trackBarServo.Minimum;
 
                     //>Agregado JEGZ 28/11/2021 - Control del Puerto Serial con C# en Visual Studio 2015 Community
-                    textBoxLinea1.Text = "";
-                    textBoxLinea2.Text = "";
                     serialPort1.DiscardOutBuffer();
-                    //strbufferingOut = "$S90";
                     strbufferingOut = "c"; //JEGZ 6:34 28/11/2021
                     pct_cerradura.Image = Properties.Resources.door_close;
                     lblDatosEnviados.Text = strbufferingOut;
                     serialPort1.WriteLine(strbufferingOut);
                     //<Agregado JEGZ 28/11/2021
                     LimpiarPass();
+                    txtContrasenia.Enabled = true;
+                    buttonImprimir.Enabled = true;
                 }
             }
         }
-        /*
-        private void EscucharSerial() //Metodo que escucha los comandos ejecutados en el arduino 24-11-2021
-        {
-            while (serialPort1.IsOpen)
-            {
-                try
-                {
-                    string cadena = serialPort1.ReadLine();
 
-                    label3.Invoke(new MethodInvoker(
-                        delegate{
-                                    label3.Text = cadena;
-                                }
-                        ));
-                }
-                catch(Exception x)
-                {
-                    //MessageBox.Show(x.Message);
-                }
-            }
-        }*/
         private void serialPort1_DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
-            /*
             try
             {
-                string str_valor_recivido;
-                //Recibe datos del arduino
-                while (serialPort1.IsOpen && serialPort1.BytesToRead > 0)
-                {
-                    str_valor_recivido = serialPort1.ReadLine();
-                    label3.Text = str_valor_recivido;
-
-                    //if(str_valor_recivido == "$12")
-                    if (str_valor_recivido == "$12")
-                    {
-                        bln_Puerta_Abierta = true;
-                        btnDoor.Text = "Close";
-                    }
-
-                    //if (str_valor_recivido == "$13")
-                    if (str_valor_recivido == "$13")
-                    {
-                        bln_Puerta_Abierta = false;
-                        btnDoor.Text = "Open";
-                    }
-                }
-            } catch (Exception x)
+                AccesoInterrupcion(serialPort1.ReadExisting());
+            }catch(Exception x)
             {
                 MessageBox.Show(x.Message);
-            }*/
-
-            /*
-            string Data_in = serialPort1.ReadExisting();
-            MessageBox.Show(Data_in);
-            label3.Text = Data_in;*/
-            AccesoInterrupcion(serialPort1.ReadExisting());
+            }
         }
 
         private void lblRecibo_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnCambiarPass_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string strNuevaPass = txtNuevaPass.Text;
+                char[] charArrayPassNueva = strNuevaPass.ToCharArray();
+
+                for (int i = 0; i < 4; i++) //valida que contenga caracteres validos
+                {
+                    if(!(charArrayPassNueva[i] == '0' || charArrayPassNueva[i] == '1' || charArrayPassNueva[i] == '2' || charArrayPassNueva[i] == '3'
+                        || charArrayPassNueva[i] == '4' || charArrayPassNueva[i] == '5' || charArrayPassNueva[i] == '6' || charArrayPassNueva[i] == '7'
+                        || charArrayPassNueva[i] == '8' || charArrayPassNueva[i] == '9' || charArrayPassNueva[i] == 'A' || charArrayPassNueva[i] == 'B'
+                        || charArrayPassNueva[i] == 'C' || charArrayPassNueva[i] == 'D' || charArrayPassNueva[i] == '*' || charArrayPassNueva[i] == '#'))
+                    {
+                        char charCaracter = charArrayPassNueva[i];
+                        blnErrorEnPassword = true;
+                    }
+                }
+
+                //valido la cadena de la nueva contraseña
+                if (txtNuevaPass.Text == "" || txtNuevaPass.TextLength < 4 || blnErrorEnPassword == true)
+                {
+                    MessageBox.Show("La contraseña esta incompleta o no es valida. Ingrese una contraseña valida", "Error");
+                    txtNuevaPass.Text = "";
+                    blnErrorEnPassword = false;
+                }
+                else
+                { //Cambio la contraseña...
+                    txtNuevaPass.Text = "";
+                    strContra = strNuevaPass;
+                    //----- Enviando el comando a Arduino
+                    serialPort1.DiscardOutBuffer();
+                    strbufferingOut = "p";
+                    lblDatosEnviados.Text = strbufferingOut;
+                    serialPort1.Write(strbufferingOut);
+
+                    //////ENVIANDO CARACTER POR CARACTER
+                    serialPort1.DiscardOutBuffer();
+                    strbufferingOut = charArrayPassNueva[0].ToString();
+                    lblDatosEnviados.Text = strbufferingOut;
+                    serialPort1.Write(strbufferingOut);
+                    ///CARACTER 2
+                    serialPort1.DiscardOutBuffer();
+                    strbufferingOut = charArrayPassNueva[1].ToString();
+                    lblDatosEnviados.Text = strbufferingOut;
+                    serialPort1.Write(strbufferingOut);
+                    ///CARACTER 3
+                    serialPort1.DiscardOutBuffer();
+                    strbufferingOut = charArrayPassNueva[2].ToString();
+                    lblDatosEnviados.Text = strbufferingOut;
+                    serialPort1.Write(strbufferingOut);
+                    ///CARACTER 4
+                    serialPort1.DiscardOutBuffer();
+                    strbufferingOut = charArrayPassNueva[3].ToString();
+                    lblDatosEnviados.Text = strbufferingOut;
+                    serialPort1.Write(strbufferingOut);
+                    //////ENVIANDO CARACTER POR CARACTER
+
+                    //Agregando un segundo caracter para indicar contraseña se envio
+                    Thread.Sleep(2500);
+                    serialPort1.DiscardOutBuffer();
+                    strbufferingOut = "q";
+                    lblDatosEnviados.Text = strbufferingOut;
+                    serialPort1.Write(strbufferingOut);
+                    //-----
+                    progressBarCambioPass.Value = 100;
+                    MessageBox.Show("Contraseña cambiada exitosamente.", "Contraseña Cambiada");
+                    progressBarCambioPass.Value = 0;
+                    txtPassActual.Text = "****";
+                    btnMostrarPassActual.Text = "MOSTRAR CONTRASEÑA";
+                }
+            }
+            catch(Exception x)
+            {
+                MessageBox.Show(x.Message);
+            }
+        }
+
+        private void btnMostrarPassActual_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if(btnMostrarPassActual.Text == "MOSTRAR CONTRASEÑA")
+                {
+                    //mostrar contraseña actual
+                    txtPassActual.Text = strContra;
+                    btnMostrarPassActual.Text = "OCULTAR CONTRASEÑA";
+
+                    //----- Enviando el comando a Arduino
+                    serialPort1.DiscardOutBuffer();
+                    strbufferingOut = "r";
+                    lblDatosEnviados.Text = strbufferingOut;
+                    serialPort1.Write(strbufferingOut);
+                }
+                else if (btnMostrarPassActual.Text == "OCULTAR CONTRASEÑA")
+                {
+                    //Ocultar contraseña actual
+                    txtPassActual.Text = "****";
+                    btnMostrarPassActual.Text = "MOSTRAR CONTRASEÑA";
+                    progressBarCambioPass.Value = 0;
+
+                    //----- Enviando el comando a Arduino
+                    serialPort1.DiscardOutBuffer();
+                    strbufferingOut = "w";
+                    lblDatosEnviados.Text = strbufferingOut;
+                    serialPort1.Write(strbufferingOut);
+                }
+            }
+            catch(Exception x)
+            {
+                MessageBox.Show(x.Message);
+            }
         }
     } // eof class
 } // eof namespace

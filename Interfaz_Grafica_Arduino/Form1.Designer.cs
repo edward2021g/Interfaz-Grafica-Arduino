@@ -34,12 +34,7 @@ namespace ControlServoLCD
             this.pct_cerradura = new System.Windows.Forms.PictureBox();
             this.btnDoor = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.buttonBorrar = new System.Windows.Forms.Button();
             this.buttonImprimir = new System.Windows.Forms.Button();
-            this.textBoxLinea2 = new System.Windows.Forms.TextBox();
-            this.labelLinea2 = new System.Windows.Forms.Label();
-            this.labelLinea1 = new System.Windows.Forms.Label();
-            this.textBoxLinea1 = new System.Windows.Forms.TextBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.buttonRefrescar = new System.Windows.Forms.Button();
             this.progressBarConexion = new System.Windows.Forms.ProgressBar();
@@ -60,6 +55,15 @@ namespace ControlServoLCD
             this.Recibo = new System.Windows.Forms.Label();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.txtPass = new System.Windows.Forms.TextBox();
+            this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.txtNuevaPass = new System.Windows.Forms.TextBox();
+            this.txtPassActual = new System.Windows.Forms.TextBox();
+            this.btnMostrarPassActual = new System.Windows.Forms.Button();
+            this.progressBarCambioPass = new System.Windows.Forms.ProgressBar();
+            this.btnCambiarPass = new System.Windows.Forms.Button();
+            this.label3 = new System.Windows.Forms.Label();
+            this.lblPassAct = new System.Windows.Forms.Label();
+            this.txtContrasenia = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pct_cerradura)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -67,6 +71,7 @@ namespace ControlServoLCD
             this.groupBox4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarServo)).BeginInit();
             this.groupBox5.SuspendLayout();
+            this.groupBox6.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -75,11 +80,11 @@ namespace ControlServoLCD
             this.groupBox1.Controls.Add(this.btnDoor);
             this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.ForeColor = System.Drawing.Color.White;
-            this.groupBox1.Location = new System.Drawing.Point(24, 24);
+            this.groupBox1.Location = new System.Drawing.Point(468, 24);
             this.groupBox1.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox1.Size = new System.Drawing.Size(380, 166);
+            this.groupBox1.Size = new System.Drawing.Size(374, 166);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "CONTROL PUERTA";
@@ -87,9 +92,9 @@ namespace ControlServoLCD
             // pct_cerradura
             // 
             this.pct_cerradura.Image = global::ControlServoLCD.Properties.Resources.door_close;
-            this.pct_cerradura.Location = new System.Drawing.Point(216, 24);
+            this.pct_cerradura.Location = new System.Drawing.Point(225, 20);
             this.pct_cerradura.Name = "pct_cerradura";
-            this.pct_cerradura.Size = new System.Drawing.Size(100, 120);
+            this.pct_cerradura.Size = new System.Drawing.Size(130, 134);
             this.pct_cerradura.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pct_cerradura.TabIndex = 7;
             this.pct_cerradura.TabStop = false;
@@ -98,47 +103,28 @@ namespace ControlServoLCD
             // 
             this.btnDoor.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(7)))), ((int)(((byte)(141)))), ((int)(((byte)(237)))));
             this.btnDoor.ForeColor = System.Drawing.Color.White;
-            this.btnDoor.Location = new System.Drawing.Point(31, 67);
+            this.btnDoor.Location = new System.Drawing.Point(51, 66);
             this.btnDoor.Name = "btnDoor";
             this.btnDoor.Size = new System.Drawing.Size(127, 47);
             this.btnDoor.TabIndex = 6;
-            this.btnDoor.Text = "OPEN";
+            this.btnDoor.Text = "ABRIR";
             this.btnDoor.UseVisualStyleBackColor = false;
             this.btnDoor.Click += new System.EventHandler(this.btnDoor_Click);
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.buttonBorrar);
+            this.groupBox2.Controls.Add(this.txtContrasenia);
             this.groupBox2.Controls.Add(this.buttonImprimir);
-            this.groupBox2.Controls.Add(this.textBoxLinea2);
-            this.groupBox2.Controls.Add(this.labelLinea2);
-            this.groupBox2.Controls.Add(this.labelLinea1);
-            this.groupBox2.Controls.Add(this.textBoxLinea1);
             this.groupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox2.ForeColor = System.Drawing.Color.White;
-            this.groupBox2.Location = new System.Drawing.Point(468, 412);
+            this.groupBox2.Location = new System.Drawing.Point(468, 408);
             this.groupBox2.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox2.Size = new System.Drawing.Size(374, 166);
+            this.groupBox2.Size = new System.Drawing.Size(374, 181);
             this.groupBox2.TabIndex = 6;
             this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "CONTROL LCD";
-            // 
-            // buttonBorrar
-            // 
-            this.buttonBorrar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(197)))), ((int)(((byte)(12)))), ((int)(((byte)(206)))));
-            this.buttonBorrar.FlatAppearance.BorderSize = 0;
-            this.buttonBorrar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonBorrar.Font = new System.Drawing.Font("Open Sans Semibold", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonBorrar.Location = new System.Drawing.Point(229, 104);
-            this.buttonBorrar.Margin = new System.Windows.Forms.Padding(2);
-            this.buttonBorrar.Name = "buttonBorrar";
-            this.buttonBorrar.Size = new System.Drawing.Size(116, 40);
-            this.buttonBorrar.TabIndex = 5;
-            this.buttonBorrar.Text = "BORRAR";
-            this.buttonBorrar.UseVisualStyleBackColor = false;
-            this.buttonBorrar.Click += new System.EventHandler(this.buttonBorrar_Click);
+            this.groupBox2.Text = "ABRIR CON CONTRASEÑA";
             // 
             // buttonImprimir
             // 
@@ -146,58 +132,14 @@ namespace ControlServoLCD
             this.buttonImprimir.FlatAppearance.BorderSize = 0;
             this.buttonImprimir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonImprimir.Font = new System.Drawing.Font("Open Sans Semibold", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonImprimir.Location = new System.Drawing.Point(229, 46);
+            this.buttonImprimir.Location = new System.Drawing.Point(228, 73);
             this.buttonImprimir.Margin = new System.Windows.Forms.Padding(2);
             this.buttonImprimir.Name = "buttonImprimir";
             this.buttonImprimir.Size = new System.Drawing.Size(116, 40);
             this.buttonImprimir.TabIndex = 4;
-            this.buttonImprimir.Text = "IMPRIMIR";
+            this.buttonImprimir.Text = "ABRIR";
             this.buttonImprimir.UseVisualStyleBackColor = false;
             this.buttonImprimir.Click += new System.EventHandler(this.buttonImprimir_Click);
-            // 
-            // textBoxLinea2
-            // 
-            this.textBoxLinea2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(144)))), ((int)(((byte)(240)))), ((int)(((byte)(27)))));
-            this.textBoxLinea2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBoxLinea2.Location = new System.Drawing.Point(29, 110);
-            this.textBoxLinea2.Margin = new System.Windows.Forms.Padding(2);
-            this.textBoxLinea2.MaxLength = 16;
-            this.textBoxLinea2.Name = "textBoxLinea2";
-            this.textBoxLinea2.Size = new System.Drawing.Size(174, 23);
-            this.textBoxLinea2.TabIndex = 3;
-            // 
-            // labelLinea2
-            // 
-            this.labelLinea2.AutoSize = true;
-            this.labelLinea2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelLinea2.Location = new System.Drawing.Point(25, 89);
-            this.labelLinea2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.labelLinea2.Name = "labelLinea2";
-            this.labelLinea2.Size = new System.Drawing.Size(51, 17);
-            this.labelLinea2.TabIndex = 2;
-            this.labelLinea2.Text = "Linea2";
-            // 
-            // labelLinea1
-            // 
-            this.labelLinea1.AutoSize = true;
-            this.labelLinea1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelLinea1.Location = new System.Drawing.Point(25, 30);
-            this.labelLinea1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.labelLinea1.Name = "labelLinea1";
-            this.labelLinea1.Size = new System.Drawing.Size(51, 17);
-            this.labelLinea1.TabIndex = 1;
-            this.labelLinea1.Text = "Linea1";
-            // 
-            // textBoxLinea1
-            // 
-            this.textBoxLinea1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(144)))), ((int)(((byte)(240)))), ((int)(((byte)(27)))));
-            this.textBoxLinea1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBoxLinea1.Location = new System.Drawing.Point(29, 54);
-            this.textBoxLinea1.Margin = new System.Windows.Forms.Padding(2);
-            this.textBoxLinea1.MaxLength = 16;
-            this.textBoxLinea1.Name = "textBoxLinea1";
-            this.textBoxLinea1.Size = new System.Drawing.Size(174, 23);
-            this.textBoxLinea1.TabIndex = 0;
             // 
             // groupBox3
             // 
@@ -210,7 +152,7 @@ namespace ControlServoLCD
             this.groupBox3.Controls.Add(this.labelPuerto);
             this.groupBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox3.ForeColor = System.Drawing.Color.White;
-            this.groupBox3.Location = new System.Drawing.Point(24, 219);
+            this.groupBox3.Location = new System.Drawing.Point(26, 408);
             this.groupBox3.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Padding = new System.Windows.Forms.Padding(2);
@@ -405,11 +347,11 @@ namespace ControlServoLCD
             this.groupBox5.Controls.Add(this.txtPass);
             this.groupBox5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox5.ForeColor = System.Drawing.Color.White;
-            this.groupBox5.Location = new System.Drawing.Point(468, 32);
+            this.groupBox5.Location = new System.Drawing.Point(26, 24);
             this.groupBox5.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox5.Name = "groupBox5";
             this.groupBox5.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox5.Size = new System.Drawing.Size(374, 166);
+            this.groupBox5.Size = new System.Drawing.Size(408, 166);
             this.groupBox5.TabIndex = 11;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "CONTRASEÑA LCD";
@@ -418,24 +360,145 @@ namespace ControlServoLCD
             // 
             this.txtPass.BackColor = System.Drawing.Color.CornflowerBlue;
             this.txtPass.Font = new System.Drawing.Font("DS-Digital", 90F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtPass.Location = new System.Drawing.Point(31, 23);
+            this.txtPass.Location = new System.Drawing.Point(48, 23);
             this.txtPass.Margin = new System.Windows.Forms.Padding(2);
             this.txtPass.MaximumSize = new System.Drawing.Size(300, 50);
             this.txtPass.MaxLength = 16;
             this.txtPass.MinimumSize = new System.Drawing.Size(300, 50);
             this.txtPass.Name = "txtPass";
             this.txtPass.ReadOnly = true;
-            this.txtPass.Size = new System.Drawing.Size(300, 127);
+            this.txtPass.Size = new System.Drawing.Size(300, 50);
             this.txtPass.TabIndex = 0;
             this.txtPass.Text = "****";
             this.txtPass.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // groupBox6
+            // 
+            this.groupBox6.Controls.Add(this.txtNuevaPass);
+            this.groupBox6.Controls.Add(this.txtPassActual);
+            this.groupBox6.Controls.Add(this.btnMostrarPassActual);
+            this.groupBox6.Controls.Add(this.progressBarCambioPass);
+            this.groupBox6.Controls.Add(this.btnCambiarPass);
+            this.groupBox6.Controls.Add(this.label3);
+            this.groupBox6.Controls.Add(this.lblPassAct);
+            this.groupBox6.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox6.ForeColor = System.Drawing.Color.White;
+            this.groupBox6.Location = new System.Drawing.Point(24, 219);
+            this.groupBox6.Margin = new System.Windows.Forms.Padding(4);
+            this.groupBox6.Name = "groupBox6";
+            this.groupBox6.Padding = new System.Windows.Forms.Padding(2);
+            this.groupBox6.Size = new System.Drawing.Size(410, 181);
+            this.groupBox6.TabIndex = 12;
+            this.groupBox6.TabStop = false;
+            this.groupBox6.Text = "CAMBIO DE CONTRASEÑA";
+            // 
+            // txtNuevaPass
+            // 
+            this.txtNuevaPass.BackColor = System.Drawing.Color.CornflowerBlue;
+            this.txtNuevaPass.Font = new System.Drawing.Font("DS-Digital", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtNuevaPass.Location = new System.Drawing.Point(106, 95);
+            this.txtNuevaPass.Margin = new System.Windows.Forms.Padding(2);
+            this.txtNuevaPass.MaximumSize = new System.Drawing.Size(200, 50);
+            this.txtNuevaPass.MaxLength = 4;
+            this.txtNuevaPass.Name = "txtNuevaPass";
+            this.txtNuevaPass.Size = new System.Drawing.Size(129, 39);
+            this.txtNuevaPass.TabIndex = 14;
+            this.txtNuevaPass.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // txtPassActual
+            // 
+            this.txtPassActual.BackColor = System.Drawing.Color.CornflowerBlue;
+            this.txtPassActual.Font = new System.Drawing.Font("DS-Digital", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtPassActual.Location = new System.Drawing.Point(107, 35);
+            this.txtPassActual.Margin = new System.Windows.Forms.Padding(2);
+            this.txtPassActual.MaximumSize = new System.Drawing.Size(200, 50);
+            this.txtPassActual.MaxLength = 4;
+            this.txtPassActual.Name = "txtPassActual";
+            this.txtPassActual.ReadOnly = true;
+            this.txtPassActual.Size = new System.Drawing.Size(129, 39);
+            this.txtPassActual.TabIndex = 13;
+            this.txtPassActual.Text = "****";
+            this.txtPassActual.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // btnMostrarPassActual
+            // 
+            this.btnMostrarPassActual.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(197)))), ((int)(((byte)(12)))), ((int)(((byte)(206)))));
+            this.btnMostrarPassActual.FlatAppearance.BorderSize = 0;
+            this.btnMostrarPassActual.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnMostrarPassActual.Font = new System.Drawing.Font("Open Sans Semibold", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnMostrarPassActual.Location = new System.Drawing.Point(254, 24);
+            this.btnMostrarPassActual.Margin = new System.Windows.Forms.Padding(2);
+            this.btnMostrarPassActual.Name = "btnMostrarPassActual";
+            this.btnMostrarPassActual.Size = new System.Drawing.Size(130, 54);
+            this.btnMostrarPassActual.TabIndex = 6;
+            this.btnMostrarPassActual.Text = "MOSTRAR CONTRASEÑA";
+            this.btnMostrarPassActual.UseVisualStyleBackColor = false;
+            this.btnMostrarPassActual.Click += new System.EventHandler(this.btnMostrarPassActual_Click);
+            // 
+            // progressBarCambioPass
+            // 
+            this.progressBarCambioPass.Location = new System.Drawing.Point(254, 151);
+            this.progressBarCambioPass.Name = "progressBarCambioPass";
+            this.progressBarCambioPass.Size = new System.Drawing.Size(130, 15);
+            this.progressBarCambioPass.TabIndex = 5;
+            // 
+            // btnCambiarPass
+            // 
+            this.btnCambiarPass.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(7)))), ((int)(((byte)(141)))), ((int)(((byte)(237)))));
+            this.btnCambiarPass.FlatAppearance.BorderSize = 0;
+            this.btnCambiarPass.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCambiarPass.Font = new System.Drawing.Font("Open Sans Semibold", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCambiarPass.Location = new System.Drawing.Point(254, 89);
+            this.btnCambiarPass.Margin = new System.Windows.Forms.Padding(0);
+            this.btnCambiarPass.Name = "btnCambiarPass";
+            this.btnCambiarPass.Size = new System.Drawing.Size(130, 52);
+            this.btnCambiarPass.TabIndex = 4;
+            this.btnCambiarPass.Text = "CAMBIAR CONTRASEÑA";
+            this.btnCambiarPass.UseVisualStyleBackColor = false;
+            this.btnCambiarPass.Click += new System.EventHandler(this.btnCambiarPass_Click);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.749999F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(14, 95);
+            this.label3.MaximumSize = new System.Drawing.Size(87, 32);
+            this.label3.MinimumSize = new System.Drawing.Size(87, 16);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(87, 32);
+            this.label3.TabIndex = 1;
+            this.label3.Text = "Nueva Contraseña";
+            // 
+            // lblPassAct
+            // 
+            this.lblPassAct.AutoSize = true;
+            this.lblPassAct.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.749999F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPassAct.Location = new System.Drawing.Point(14, 47);
+            this.lblPassAct.Name = "lblPassAct";
+            this.lblPassAct.Size = new System.Drawing.Size(87, 16);
+            this.lblPassAct.TabIndex = 0;
+            this.lblPassAct.Text = "Contraseña";
+            // 
+            // txtContrasenia
+            // 
+            this.txtContrasenia.BackColor = System.Drawing.Color.CornflowerBlue;
+            this.txtContrasenia.Font = new System.Drawing.Font("DS-Digital", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtContrasenia.Location = new System.Drawing.Point(74, 75);
+            this.txtContrasenia.Margin = new System.Windows.Forms.Padding(2);
+            this.txtContrasenia.MaximumSize = new System.Drawing.Size(200, 50);
+            this.txtContrasenia.MaxLength = 4;
+            this.txtContrasenia.Name = "txtContrasenia";
+            this.txtContrasenia.Size = new System.Drawing.Size(129, 39);
+            this.txtContrasenia.TabIndex = 15;
+            this.txtContrasenia.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(26)))), ((int)(((byte)(46)))));
-            this.ClientSize = new System.Drawing.Size(877, 412);
+            this.ClientSize = new System.Drawing.Size(888, 602);
+            this.Controls.Add(this.groupBox6);
             this.Controls.Add(this.groupBox5);
             this.Controls.Add(this.Recibo);
             this.Controls.Add(this.Envio);
@@ -463,6 +526,8 @@ namespace ControlServoLCD
             ((System.ComponentModel.ISupportInitialize)(this.trackBarServo)).EndInit();
             this.groupBox5.ResumeLayout(false);
             this.groupBox5.PerformLayout();
+            this.groupBox6.ResumeLayout(false);
+            this.groupBox6.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -472,13 +537,9 @@ namespace ControlServoLCD
 
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.Label labelLinea1;
-        private System.Windows.Forms.TextBox textBoxLinea1;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.Button buttonImprimir;
-        private System.Windows.Forms.TextBox textBoxLinea2;
-        private System.Windows.Forms.Label labelLinea2;
         private System.Windows.Forms.ProgressBar progressBarConexion;
         private System.Windows.Forms.Button buttonConectar;
         private System.Windows.Forms.ComboBox comboBoxBaud;
@@ -490,7 +551,6 @@ namespace ControlServoLCD
         private System.Windows.Forms.TrackBar trackBarServo;
         private System.IO.Ports.SerialPort serialPort1;
         private System.Windows.Forms.Label labelInfo;
-        private System.Windows.Forms.Button buttonBorrar;
         private System.Windows.Forms.Button buttonRefrescar;
         private System.Windows.Forms.Button btnDoor;
         private System.Windows.Forms.Label lblRecibo;
@@ -500,6 +560,15 @@ namespace ControlServoLCD
         private System.Windows.Forms.PictureBox pct_cerradura;
         private System.Windows.Forms.GroupBox groupBox5;
         private System.Windows.Forms.TextBox txtPass;
+        private System.Windows.Forms.GroupBox groupBox6;
+        private System.Windows.Forms.TextBox txtNuevaPass;
+        private System.Windows.Forms.TextBox txtPassActual;
+        private System.Windows.Forms.Button btnMostrarPassActual;
+        private System.Windows.Forms.ProgressBar progressBarCambioPass;
+        private System.Windows.Forms.Button btnCambiarPass;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label lblPassAct;
+        private System.Windows.Forms.TextBox txtContrasenia;
     }
 }
 
